@@ -9,12 +9,11 @@ with open(inFile,'r') as file:
             line = [int(i) for i in line]
             list_of_lists.append(line)
 
-print(list_of_lists)
+print("Input:",list_of_lists)
 
 
 def compare(x,y):
     if 0 <abs((x - y)) <= 3 :
-        # print(x,y,True)
         return True
     
 def is_increasing_or_decreasing(l):
@@ -34,19 +33,10 @@ for i in list_of_lists:
                 j+=1
             else:
                 safe = False
-                print(False)
                 break
                 
-            # print("here is ",safe)
         if safe:
             safe_count += 1
-        print(i,"list completed and count is",safe_count)
+        print(i,":",safe)
 
-print(safe_count)
-
-
-# print(lines[0])
-
-# for i in lines:
-#     i = i.strip()
-#     print(all(i[j] <= i[j + 1] for j in range(len(i) - 1)))
+print(safe_count," reports are safe")
