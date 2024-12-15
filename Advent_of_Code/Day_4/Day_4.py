@@ -18,8 +18,11 @@ def check_left_up_diag(x,pos,word_search):
     letter = xmas[x:][0]
     
     print("looking left_up here for",letter,"...",pos)
+    if row < 0 or col < 0:
+        print("Out of Bounds...")
     if letter == 'S' and letter == word_search[row][col]:
         print("Found XMAS")
+        occurances.append("XMAS")
     elif letter == word_search[row][col]:
         print("Found:",letter)
         check_left_up_diag(x,(row,col),word_search)
@@ -32,8 +35,11 @@ def check_left_down_diag(x,pos,word_search):
     letter = xmas[x:][0]
     
     print("looking left_down here for",letter,"...",pos)
-    if letter == 'S' and letter == word_search[row][col]:
+    if row > len(word_search)-1 or col < 0:
+        print("Out of Bounds...")
+    elif letter == 'S' and letter == word_search[row][col]:
         print("Found XMAS")
+        occurances.append("XMAS")
     elif letter == word_search[row][col]:
         print("Found:",letter)
         check_left_down_diag(x,(row,col),word_search)
@@ -44,10 +50,13 @@ def check_right_up_diag(x,pos,word_search):
     pos = (row,col)
     x+=1
     letter = xmas[x:][0]
-    
+
     print("looking right_up here for",letter,"...",pos)
-    if letter == 'S' and letter == word_search[row][col]:
+    if row < 0 or col > len(word_search[row])-1:
+        print("Out of Bounds...")
+    elif letter == 'S' and letter == word_search[row][col]:
         print("Found XMAS")
+        occurances.append("XMAS")
     elif letter == word_search[row][col]:
         print("Found:",letter)
         check_right_up_diag(x,(row,col),word_search)
@@ -60,8 +69,11 @@ def check_right_down_diag(x,pos,word_search):
     letter = xmas[x:][0]
     
     print("looking right_down here for",letter,"...",pos)
-    if letter == 'S' and letter == word_search[row][col]:
+    if row > len(word_search)-1 or col > len(word_search[row])-1 :
+        print("Out of Bounds...")
+    elif letter == 'S' and letter == word_search[row][col]:
         print("Found XMAS")
+        occurances.append("XMAS")
     elif letter == word_search[row][col]:
         print("Found:",letter)
         check_right_down_diag(x,(row,col),word_search)
@@ -91,7 +103,7 @@ def main():
                 check_right_down_diag(0,pos,word_search)
                 
 
-
+    print(occurances.count("XMAS"))
             # if letter in xmas and len(word) < len(xmas):
             #     word = word + letter
             # print(word)
@@ -108,5 +120,6 @@ if __name__ == "__main__":
         word_search = file.read().split()
 
     xmas = "XMAS"
+    occurances = []
 
     main()
