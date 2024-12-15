@@ -16,34 +16,49 @@ def is_safe(l):
         else:
             safe = False
             break
-        
         i+=1
 
     return safe
 
-
 def main():
     safe_count = 0
+    safe = False
 
     for i in list_of_lists:
         if is_safe(i):
-            print(i,":",is_safe(i))
             safe_count+=1
+            safe = True
+            print(i,"Safe")
+        else:
+            j = 0
+            while j <= len(i)-1:
+                temp = i.pop(j)
+                if is_safe(i):
+                    safe_count += 1
+                    safe = True
+                    print(i,"Safe")
+                    break
+                else:
+                    i.insert(j,temp)
+                    safe = False
+                    j += 1
+        
+        if not safe: 
+            print(i,"Unsafe")
 
     print(safe_count," reports are safe")
-
 
 
 if __name__ == "__main__":
     # inFile = sys.argv[1]
     list_of_lists = []
-    with open('test.txt','r') as file:
+    with open('input.txt','r') as file:
         for line in file:
             line = line.split()
             if line:
                 line = [int(i) for i in line]
                 list_of_lists.append(line)
 
-    print("Input:",list_of_lists)
+    # print("Input:",list_of_lists)
 
     main()
